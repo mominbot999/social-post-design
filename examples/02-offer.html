@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Offer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Inter+Tight:wght@700;800&family=Hind+Siliguri:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+/* social-post-design — base styles. Inline this whole file into the <style> of every design. */
+
+:root {
+  /* Theme tokens — override per design (light / dark / brand). */
+  --bg: #f6f3ee;
+  --surface: #ffffff;
+  --fg: #16130f;
+  --muted: #6b645a;
+  --accent: #e4572e;
+  --accent-fg: #ffffff;
+  --line: rgba(22, 19, 15, 0.12);
+
+  --font-display: "Inter Tight", "Inter", "Hind Siliguri", "Noto Sans Bengali", system-ui, sans-serif;
+  --font-body: "Inter", "Hind Siliguri", "Noto Sans Bengali", system-ui, sans-serif;
+}
+
+.theme-dark {
+  --bg: #111214;
+  --surface: #1b1d21;
+  --fg: #f4f2ee;
+  --muted: #a3a09a;
+  --accent: #ffb547;
+  --accent-fg: #111214;
+  --line: rgba(244, 242, 238, 0.14);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: #d9d6d0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  padding: 40px;
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* One .canvas = one exported image. Size comes from the format class. */
+.canvas {
+  /* --u is the design unit: 1% of the canvas width. Size everything in --u so
+     layouts scale cleanly between formats. */
+  --u: calc(var(--w) / 100);
+  position: relative;
+  width: var(--w);
+  height: var(--h);
+  overflow: hidden;
+  background: var(--bg);
+  color: var(--fg);
+  padding: var(--safe);
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+}
+
+/* Formats (see references/formats.md) */
+.square    { --w: 1080px; --h: 1080px; --safe: calc(1080px * 0.07); }
+.portrait  { --w: 1080px; --h: 1350px; --safe: calc(1080px * 0.07); }
+.story     { --w: 1080px; --h: 1920px; --safe: 220px 80px 340px; }
+.landscape { --w: 1200px; --h: 628px;  --safe: calc(1200px * 0.05); }
+.thumb     { --w: 1280px; --h: 720px;  --safe: calc(1280px * 0.05); }
+.cover     { --w: 1640px; --h: 624px;  --safe: 60px 120px; }
+
+/* Type scale — always in --u so it scales with the canvas. */
+.eyebrow {
+  font-family: var(--font-body);
+  font-size: calc(var(--u) * 2.6);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.display {
+  font-family: var(--font-display);
+  font-size: calc(var(--u) * 10.5);
+  font-weight: 800;
+  line-height: 1.04;
+  letter-spacing: -0.03em;
+}
+.headline {
+  font-family: var(--font-display);
+  font-size: calc(var(--u) * 7.2);
+  font-weight: 800;
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+}
+.title {
+  font-family: var(--font-display);
+  font-size: calc(var(--u) * 4.4);
+  font-weight: 700;
+  line-height: 1.12;
+}
+.body {
+  font-size: calc(var(--u) * 3.4);
+  line-height: 1.4;
+  color: var(--muted);
+}
+.small {
+  font-size: calc(var(--u) * 2.4);
+  line-height: 1.35;
+  color: var(--muted);
+}
+
+/* Bangla text needs more line height and a little more size. */
+[lang="bn"] .display, .display[lang="bn"] { line-height: 1.25; letter-spacing: 0; }
+[lang="bn"] .headline, .headline[lang="bn"] { line-height: 1.3; letter-spacing: 0; }
+[lang="bn"] .body, .body[lang="bn"] { line-height: 1.7; font-size: calc(var(--u) * 3.4); }
+[lang="bn"] .eyebrow, .eyebrow[lang="bn"] { letter-spacing: 0.02em; text-transform: none; }
+
+.accent { color: var(--accent); }
+.mark {
+  background: var(--accent);
+  color: var(--accent-fg);
+  padding: 0 0.12em;
+  border-radius: 0.06em;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
+/* Layout helpers */
+.stack { display: flex; flex-direction: column; gap: calc(var(--u) * 3); }
+.row { display: flex; align-items: center; gap: calc(var(--u) * 3); }
+.grow { flex: 1; }
+.bottom { margin-top: auto; }
+.center { align-items: center; justify-content: center; text-align: center; }
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+  align-self: flex-start;
+  padding: 0.55em 1.1em;
+  border-radius: 999px;
+  background: var(--accent);
+  color: var(--accent-fg);
+  font-weight: 700;
+  font-size: calc(var(--u) * 2.8);
+}
+.pill.ghost { background: transparent; color: var(--fg); border: 2px solid var(--line); }
+
+.card {
+  background: var(--surface);
+  border: 2px solid var(--line);
+  border-radius: calc(var(--u) * 2.4);
+  padding: calc(var(--u) * 4);
+}
+
+.rule { height: 3px; background: var(--fg); width: calc(var(--u) * 10); }
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: calc(var(--u) * 1.6);
+  font-weight: 700;
+  font-size: calc(var(--u) * 2.6);
+}
+.brand .logo {
+  width: calc(var(--u) * 6);
+  height: calc(var(--u) * 6);
+  border-radius: calc(var(--u) * 1.4);
+  background: var(--fg);
+  color: var(--bg);
+  display: grid;
+  place-items: center;
+  font-weight: 800;
+}
+
+.photo {
+  background: linear-gradient(135deg, var(--line), transparent), var(--surface);
+  border-radius: calc(var(--u) * 2.4);
+  overflow: hidden;
+}
+.photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+.slide-no {
+  position: absolute;
+  right: calc(var(--u) * 7);
+  top: calc(var(--u) * 7);
+  font-weight: 700;
+  font-size: calc(var(--u) * 2.4);
+  color: var(--muted);
+}
+
+:root{--bg:#eef3ea;--fg:#14211a;--accent:#2f8f4e;--muted:#4f5f55;--line:rgba(20,33,26,.14)} .brand .logo{background:var(--accent);color:#fff}
+</style>
+</head>
+<body>
+<section class="canvas square" data-name="02-offer">
+  <div class="eyebrow">Weekend offer</div>
+  <h1 class="headline" style="margin-top:calc(var(--u)*3)">Power Tiller<br>GX-160</h1>
+  <div class="row" style="align-items:baseline; margin-top:calc(var(--u)*5)">
+    <span class="display accent">৳98,500</span>
+    <span class="body" style="text-decoration:line-through">৳1,05,000</span>
+  </div>
+  <ul class="body stack" style="list-style:none; gap:calc(var(--u)*1.5); margin-top:calc(var(--u)*4)">
+    <li>✓ 1-year service warranty</li><li>✓ Free delivery this weekend</li>
+  </ul>
+  <div class="row bottom" style="justify-content:space-between">
+    <span class="pill">Message us to order</span>
+    <div class="brand"><span class="logo">F</span>FieldWorks</div>
+  </div>
+</section>
+</body>
+</html>

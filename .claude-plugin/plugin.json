@@ -1,0 +1,10 @@
+{
+  "name": "social-post-design",
+  "version": "0.1.0",
+  "description": "Design social media graphics (posts, carousels, stories, ads, thumbnails) as self-contained HTML at exact platform sizes, self-check them, and export PNG.",
+  "author": { "name": "Momin", "url": "https://github.com/mominbot999" },
+  "homepage": "https://github.com/mominbot999/social-post-design",
+  "repository": "https://github.com/mominbot999/social-post-design",
+  "license": "MIT",
+  "keywords": ["social-media", "design", "instagram", "facebook", "carousel", "thumbnail", "agent-skill"]
+}

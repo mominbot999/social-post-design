@@ -1,0 +1,11 @@
+{
+  "name": "social-post-design",
+  "owner": { "name": "Momin", "url": "https://github.com/mominbot999" },
+  "plugins": [
+    {
+      "name": "social-post-design",
+      "source": "./",
+      "description": "Social media graphics at exact platform sizes, with self-check and PNG export."
+    }
+  ]
+}
